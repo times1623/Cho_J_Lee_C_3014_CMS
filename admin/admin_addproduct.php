@@ -1,7 +1,25 @@
-<?php 
-	require_once('scripts/config.php');
-	confirm_logged_in();
+<?php
+require_once 'scripts/config.php';
+confirm_logged_in();
+
+$gen_tbl          = 'tbl_genre';
+$movie_categories = getAll($gen_tbl);
+
+if (isset($_POST['submit'])) {
+    $cover   = $_FILES['cover'];
+    $title   = $_POST['title'];
+    $year    = $_POST['year'];
+    $run     = $_POST['run'];
+    $story   = $_POST['story'];
+    $trailer = $_POST['trailer'];
+    $release = $_POST['release'];
+    $genre   = $_POST['genList'];
+    $result  = addMovie($cover, $title, $year, $run, $story, $trailer, $release, $genre);
+    $message = $result;
+}
+
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -44,53 +62,36 @@
       </div>
     </div>
   </header>  
-  <div class="container-fluid mainNav">
-<div class="row">
-<div class="col-12 col-md-8 mx-auto">
-<nav>
-	<ul>
-		<li><a href="#">MEN</a></li>
-		<li><a href="#">WOMEN</a></li>
-		<li><a href="#">KIDS</a></li>
-		<li><a href="#">FOOTWEAR</a></li>
-		<li><a href="#">SPORTS GEAR</a></li>
-		<li><a href="#">ELECTRONIC</a></li>
-		<li><a href="#">SPORT ACCESORIES</a></li>
-		<li><a href="#">ETC</a></li>
-		<li><a href="admin_addproduct.php">ADD PRODUCT</a></li>
-	</ul>
-</nav>
-</div>
-</div>
-</div>
-
-  <div class="container-fluid">
-	<div class="row">
-	<div class="col-12 col-md-4 offset-md-8">
-	<form class="search-container">
-	<input type="text" placeholder="Search..">
-	<button type="submit">Submit</button>
-  </form>
-   </div>
-	</div>
-</div>
-
-
 
 <div class="container">
 <div class="row justify-content-center">    	
   <div class="col-md-4">
-    <div class="card card1">
-      <a href="#">
-       <img src="../images/jordan1.jpg" class="img-fluid img1">
-      </a>
-
-      <div class="card-body">
-          <h3 class="mt-2">Jordan Air Nike #1</h3>
-          <p>This is the most popular product among Canadians in 2018</p>
-		  <a href="admin_editproduct.php" class="btn btn-primary" style="background-color: #FF0002; color:white; border:none;">Edit Product</a>
-		  <a href="#" class="btn btn-primary" style="background-color: #FF0002; color:white; border:none;">Delete Product</a>
+    <div class="card card1" id="productAdd" style="background-color:transparent; border:1px solid white; padding: 2rem; color:white;">
+    <form action="">
+    <div class="form-group" style="background-color:transparent;">
+        <label for="image">Product Image:</label>
+        <input type="file" name="image" id="image" value="" style="width:100%;">
       </div>
+      <div class="form-group">
+        <label for="title">Product Title:</label>
+        <input type="text" name="title" id="title" value="" required>
+      </div>
+      <div class="form-group">
+        <label for="desc">Product Description:</label>
+        <textarea class="form-control" id="desc" name="desc" id="desc" rows="3" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="price">Product Price:</label>
+        <input type="text" name="price" id="price" value="" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Product Category</label>
+        <select class="form-control" id="category" name="category" required>
+          <option>--Select a Category--</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" style="background-color: #FF0002; color:white; border:none;">Submit</button>
+    </form>
     </div>
   </div>
 </div>
