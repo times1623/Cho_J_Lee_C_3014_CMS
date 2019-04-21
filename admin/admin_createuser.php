@@ -1,54 +1,60 @@
-<?php 
-	require_once('scripts/config.php');
+<?php
+ini_set('display_errors', 'On');
+error_reporting(E_ALL);
 
-	confirm_logged_in();
+require_once('scripts/config.php');
+confirm_logged_in();
 
-	if(isset($_POST['submit'])){
-		//Do some preprocess for the data
-		// trim would just be a start point...
-		$fname = trim($_POST['fname']);
-		$username = trim($_POST['username']);
-		$password = trim($_POST['password']);
-		$email = trim($_POST['email']);
-
-
-		//Validation?
-		if(empty($username) || empty($password) || empty($email)){
-			$message = 'Please fill the required fields';
-		}else{
-			$result = createUser($fname,$username,$password,$email);
-			
-			$message = $result;
-		}
-	}
+if(filter_has_var(INPUT_POST,'submit')) {
+  // var_dump($_POST);
+  $username = trim(htmlspecialchars($_POST['username']));
+  $fname = trim(htmlspecialchars($_POST['fname']));
+  $email = trim(htmlspecialchars($_POST['email']));
+  // var_dump($username, $password, $email, $fname);
+  //Validation
+  if(empty($_POST['username']) || empty($_POST['fname']))
+  {
+    $message = 'Please fill out all fields';
+    
+  }elseif(filter_var($email, FILTER_VALIDATE_EMAIL) === false)
+  {
+    $message = 'Please fill out all fields';
+  }
+  else
+  {
+    $result = createUser($username, $fname, $email);
+    $message = $result;
+  }
+}
 ?>
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<title>Create User</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../css/main.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,500" rel="stylesheet">
+  <title>Create User</title>
 </head>
 <body>
-	<?php if(!empty($message)):?>
-		<p><?php echo $message;?></p>
-	<?php endif;?>
-	<h2>Create User</h2>
-	<form action="admin_createuser.php" method="post">
-		<label for="first-name">First Name:</label>
-		<input type="text" id="first-name" name="fname" value=""><br><br>
+  <h1>Create User</h1>
+  <?php if(!empty($message)):?>
+  <div class="message">
+    <p><?php echo $message?></p>
+    </div>
+  <?php endif; ?>
+  <form action="admin_createuser.php" method="post">
+    <label for="first-name">First Name:</label>
+     <input type="text" id="first-name" name="fname" value="">
 
-		<label for="username">User Name:</label>
-		<input type="text" id="username" name="username" value=""><br><br>
+    <label for="username">Username:</label>
+     <input type="text" id="username" name="username" value="">
 
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" value=""><br><br>
+    <label for="email">Email:</label>
+     <input type="email" id="email" name="email" value="">
 
-		<label for="password">Password:</label>
-		<input type="text" id="password" name="password" value=""><br><br>
-
-		<button type="submit" name="submit">Create User</button>
-	</form>
-
+    <button class="btn" type="submit" name="submit">Create User</button>
+  </form>
 </body>
 </html>
