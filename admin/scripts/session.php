@@ -10,5 +10,5 @@ function confirm_logged_in(){
 function logged_out(){
   session_destroy();
 
-  redirect_to('../admin_login.php');
+  redirect_to('../../index.php');
 }

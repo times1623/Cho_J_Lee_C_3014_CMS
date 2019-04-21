@@ -1,73 +1,92 @@
 <?php 
+
 function login($username, $password, $ip){
-	require_once('connect.php');
+    require_once('connect.php');
+  
 
-	//Check if user exists
+     //Check if username exists
+	$check_exist_query = 'SELECT COUNT(*) FROM tbl_users';
+	$check_exist_query .= ' WHERE user_name = :username';
 	
-	$check_exist_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name=:user_name';
-
 	$user_set = $pdo->prepare($check_exist_query);
-
 	$user_set->execute(
 		array(
-			':user_name'=>$username
+			':username'=>$username
 		)
-	);
+    );
+
 
 	if($user_set->fetchColumn()>0){
-		//When user exists, then check if user info is validated
+        // echo "User Exists!";
 
-		// update query to find an account which is not blocked 
-		// When new user do not login for 30 sec -> their account will be blocked
-		// No longer able to login 
-		$get_user_query = 'SELECT * FROM tbl_user WHERE user_name = :username AND user_pass = :password AND user_block = "NO"';
-		$get_user_set = $pdo->prepare($get_user_query);
+        $get_user_query = 'SELECT * FROM tbl_users WHERE user_name = :username';
+        
+        $get_user_set = $pdo->prepare($get_user_query);
 
-		$get_user_set->execute(
-			array(
-				':username'=>$username,
-				':password'=>$password
-			)
-		);
+        //TODO: don't forget to bind the placeholders in here
+        $get_user_set->execute(
+            array(':username'=>$username
+            )
+        );
 
-		while($found_user = $get_user_set->fetch(PDO::FETCH_ASSOC)){
-			$id = $found_user['user_id'];
-			$_SESSION['user_id'] = $id;
-			$_SESSION['user_name'] = $found_user['user_name'];
-			$userBlock = $found_user['user_block'];
-	
+        while($found_user = $get_user_set->fetch(PDO::FETCH_ASSOC)){
+            //pwd,admin to validate the password
+            
+            $id = $found_user['user_id'];
+            $pwd = $found_user['user_pass'];
+    
+            $_SESSION['user_pass'] = $pwd;
+            $_SESSION['user_id'] = $id;
+            $_SESSION['user_name'] = $found_user['user_name'];  
+            $_SESSION['user_date'] = $found_user['user_date'];
 
-			// set variable to check user first time login
-			$logtime = $found_user['user_logtime'];
+            // if it's admin check if password from post match the password.
 
-			$update_ip_query = 'UPDATE tbl_user SET user_ip=:ip WHERE user_id = :id';
-			$update_ip_set = $pdo->prepare($update_ip_query);
-			$update_ip_set->execute(
-				array(
-					':ip'=>$ip,
-					':id'=>$id
-				)
-			);
+            if(password_verify($password,$pwd)){
+            //Update user login IP
+            $update_ip_query = 'UPDATE tbl_users SET user_ip = :ip WHERE user_id = :id';
+            $update_ip_set = $pdo->prepare($update_ip_query);
+            $update_ip_set->execute(
+                array(
+                ':id'=>$id,
+                ':ip'=>$ip)
+            );
+         
+            //set query to update the userdate as present time which is NOW().
+            $queryLogintime = 'UPDATE tbl_users SET user_date = NOW() WHERE user_id = :id';
 
-			// if user login first time -> go to admin_edituser.php
-			// if user login isn't first time -> go to index.php
-			if($logtime == 0){
-				redirect_to('admin_edituser.php');
-			}else{
-				redirect_to('index.php');
-			};
-			
+            $runLogintime = $pdo->prepare($queryLogintime);
 
-		}
+            $runLogintime->execute(
+                array(':id'=>$id
+                )
+            );
 
-		if(empty($id)){
-			$message = 'Login Failed';
-			return $message;
-		}
-
-		// redirect_to('index.php');
-	}else{
-		$message = 'User does not exists';
-		return $message;
-	}
+            //check if user is locked with column user_lock
+            $check_ip_query = 'SELECT COUNT(*) FROM tbl_users WHERE user_lock = "no" AND user_id = :id';
+            $user_check = $pdo->prepare($check_ip_query);
+            $user_check->execute(
+                array(':id'=>$id
+                )
+            );
+            
+            //if it isn't lock redirect to index.php or send message that it's locked.
+            if($user_check->fetchColumn()>0){
+            redirect_to('index.php');
+            }else{
+                $message = 'Your Account is Locked';
+                return $message;
+            }
+            redirect_to('index.php');
+        }else{
+      
+        // return $message; 
+         return 'Check you Password';
+        }
+}
+    } else{
+        //if ID does not match
+        $message = 'Login Failed! User Not Existed' ;
+        return $message;
+    }
 }
