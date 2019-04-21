@@ -1,86 +1,62 @@
 <?php
 //! ------------------- ADD PRODUCT -----------------------
-function addProduct($image, $title, $desc, $price, $category)
+function  addProduct($image, $title, $desc, $price, $available, $brand, $color, $gender, $sale, $size)
 {
+  if(!empty($image) || !empty($title) || !empty($desc) || !empty($price) || !empty($available) || !empty($brand) || !empty($color) || !empty($gender) || !empty($sale) || !empty($size)){
     try {
         include 'connect.php';
 
-        $product_name = htmlspecialchars($title);
-
-        //! image file information
-        $product_image_name = $image['name'];
-        $product_image_temp = $image['tmp_name'];
-        $product_image_size = $image['size'];
-        $product_image_error = $image['error'];
-        $product_image_type = $image['type'];
-
-        // 1. check FILE extension
-        $file_extension = strtolower(pathinfo($product_image_name, PATHINFO_EXTENSION));
-        $accepted_extensions = array('gif', 'jpg', 'jpe', 'jpeg', 'png', 'JPG');
-        if (!in_array($file_extension, $accepted_extensions)) {
-            throw new Exception('Wrong file type!');
+        if($image!== null){
+          $file_type      = pathinfo($image['name'], PATHINFO_EXTENSION);
+          $accepted_types = array('gif', 'jpg', 'jpe', 'jpeg', 'png');
+          if (!in_array($file_type, $accepted_types)) {
+              throw new Exception('Wrong file types!');
+          }
+          // Check file size
+          if ($image["size"] > 5000000) {
+            echo "Sorry, your file is too large.";
+            throw new Exception('Sorry, your file is too large!');
+          }
+          //3. Move the uploaded file around
+          $sourceProperties = getimagesize($image['tmp_name']);
+          $fileNewName = time();
+          $folderPath = '../images/';
+          $imageType = $sourceProperties[2];
+    
+    
+          function imageResize($imageResourceId,$width,$height) {
+            $targetWidth =350;
+            $targetHeight =250;
+            $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
+            imagecopyresampled($targetLayer,$imageResourceId,0,0,0,0,$targetWidth,$targetHeight, $width,$height);
+            return $targetLayer;
+        }
+          switch ($imageType) {
+              case IMAGETYPE_PNG:
+                  $imageResourceId = imagecreatefrompng($image['tmp_name']); 
+                  $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                  imagepng($targetLayer,$folderPath. $fileNewName. "_product.". $file_type);
+                  break;
+              case IMAGETYPE_GIF:
+                  $imageResourceId = imagecreatefromgif($image['tmp_name']); 
+                  $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                  imagegif($targetLayer,$folderPath. $fileNewName. "_product.". $file_type);
+                  break;
+              case IMAGETYPE_JPEG:
+                  $imageResourceId = imagecreatefromjpeg($image['tmp_name']); 
+                  $targetLayer = imageResize($imageResourceId,$sourceProperties[0],$sourceProperties[1]);
+                  imagejpeg($targetLayer,$folderPath. $fileNewName. "_product.". $file_type);
+                  break;
+              default:
+                  echo "Invalid Image type.";
+                  exit;
+                  break;
+          }
+          move_uploaded_file($image['tmp_name'], $folderPath. $fileNewName. ".". $file_type);
+    
         }
 
-        // 2. check FILE error
-        if ($product_image_error !== 0) {
-            throw new Exception('Error in uploading, file size can be too big!');
-        }
-
-        // 3. assign FILE unique name (based on microsecond actual timeformat)
-        $product_image = time() . '_' . rand(1000, 9999) . "." . $file_extension;
-
-        // 4. resize image
-        $folderPath = "../images/thumbs/";
-        $sourceProperties = getimagesize($product_image_temp);
-        $imageType = $sourceProperties[2];
-
-        switch ($imageType) {
-
-            case IMAGETYPE_PNG:
-
-                $imageResourceId = imagecreatefrompng($product_image_temp);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagepng($targetLayer, $folderPath . "th_" . $product_image);
-
-                $product_resized_image = "th_" . $product_image;
-
-                break;
-
-            case IMAGETYPE_GIF:
-
-                $imageResourceId = imagecreatefromgif($product_image_temp);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagegif($targetLayer, $folderPath . "th_" . $product_image);
-
-                $product_resized_image = "th_" . $product_image;
-
-                break;
-
-            case IMAGETYPE_JPEG:
-
-                $imageResourceId = imagecreatefromjpeg($product_image_temp);
-                $targetLayer = imageResize($imageResourceId, $sourceProperties[0], $sourceProperties[1]);
-                imagejpeg($targetLayer, $folderPath . "th_" . $product_image);
-
-                $product_resized_image = "th_" . $product_image;
-
-                break;
-
-            default:
-
-                echo "Invalid Image type.";
-
-                exit;
-
-                break;
-        }
-
-        // move img from temporary location to images folder
-        move_uploaded_file($product_image_temp, "../images/$product_image");
-
-        $product_content = htmlspecialchars($desc);
-
-        $insert_product_query = 'INSERT INTO tbl_products(products_name, products_description,';
+        $insert_product_query = 'INSERT INTO tbl_products(products_name, products_desc,';
         $insert_product_query .= ' products_img, products_price)';
         $insert_product_query .= ' VALUES(:products_name, :products_description, :products_img,';
         $insert_product_query .= ' :products_price)';
@@ -88,38 +64,119 @@ function addProduct($image, $title, $desc, $price, $category)
         $insert_product = $pdo->prepare($insert_product_query);
         $insert_result = $insert_product->execute(
             array(
-                ':products_name' => $title,
-                ':products_description' => $product_content,
-                ':products_img' => $product_image,
-                ':products_price' => $price,
+              ':products_name' => $title,
+              ':products_description' => $desc,
+              ':products_price' => $price,
+              ':products_img' => $fileNewName."_product.".$file_type
             )
         );
 
         if (!$insert_result) {
-            throw new Exception('Failed to insert the new product!');
+            throw new Exception('Failed to insert the new product');
         }
 
         $last_id = $pdo->lastInsertId();
-        $insert_cat_query = 'INSERT INTO tbl_prods_cats(products_id, cats_id) VALUES(:product_id, :cat_id)';
-        $insert_cat = $pdo->prepare($insert_cat_query);
-        $insert_cat->execute(
+// insert categories
+        $insert_av_query = 'INSERT INTO tbl_prod_available(products_id, available_id) VALUES(:product_id, :available_id)';
+        $insert_av = $pdo->prepare($insert_av_query);
+        $insert_av->execute(
             array(
                 ':product_id' => $last_id,
-                ':cat_id' => $category,
+                ':available_id' => $available,
             )
         );
-        if (!$insert_cat->rowCount()) {
-            throw new Exception('Failed to set Category!');
+        if (!$insert_av->rowCount()) {
+            throw new Exception('Failed to set Availability!');
         }
-        //5. If all of above works fine, redirect user to index.php
-        // redirect_to('index.php');
+
+        $insert_brand_query = 'INSERT INTO tbl_prod_brand(products_id, brand_id) VALUES(:product_id, :brand_id)';
+        $insert_brand = $pdo->prepare($insert_brand_query);
+        $insert_brand->execute(
+            array(
+                ':product_id' => $last_id,
+                ':brand_id' => $brand,
+            )
+        );
+        if (!$insert_brand->rowCount()) {
+            throw new Exception('Failed to set brand!');
+        }
+
+        $insert_color_query = 'INSERT INTO tbl_prod_color(products_id, color_id) VALUES(:product_id, :color_id)';
+        $insert_color = $pdo->prepare($insert_color_query);
+        $insert_color->execute(
+            array(
+                ':product_id' => $last_id,
+                ':color_id' => $color,
+            )
+        );
+        if (!$insert_color->rowCount()) {
+            throw new Exception('Failed to set color!');
+        }
+
+        $insert_gender_query = 'INSERT INTO tbl_prod_gender(products_id, gender_id) VALUES(:product_id, :gender_id)';
+        $insert_gender = $pdo->prepare($insert_gender_query);
+        $insert_gender->execute(
+            array(
+                ':product_id' => $last_id,
+                ':gender_id' => $gender,
+            )
+        );
+        if (!$insert_gender->rowCount()) {
+            throw new Exception('Failed to set gender!');
+        }
+        $int = (int) filter_var($price, FILTER_SANITIZE_NUMBER_INT);
+        if($int>50){
+          $price_level=1;
+        }elseif($int>=50 && $int <100){
+          $price_level=2;
+        }else{
+          $price_level=3;
+        }
+        $insert_price_query = 'INSERT INTO tbl_prod_price(products_id, price_id) VALUES(:product_id, :price_id)';
+        $insert_price = $pdo->prepare($insert_price_query);
+        $insert_price->execute(
+            array(
+                ':product_id' => $last_id,
+                ':price_id' => $price_level,
+            )
+        );
+        if (!$insert_price->rowCount()) {
+            throw new Exception('Failed to set price!');
+        }
+
+        $insert_sale_query = 'INSERT INTO tbl_prod_sale(products_id, sale_id) VALUES(:product_id, :sale_id)';
+        $insert_sale = $pdo->prepare($insert_sale_query);
+        $insert_sale->execute(
+            array(
+                ':product_id' => $last_id,
+                ':sale_id' => $sale,
+            )
+        );
+        if (!$insert_sale->rowCount()) {
+            throw new Exception('Failed to set sale!');
+        }
+
+        $insert_size_query = 'INSERT INTO tbl_prod_size(products_id, size_id) VALUES(:product_id, :size_id)';
+        $insert_size = $pdo->prepare($insert_size_query);
+        $insert_size->execute(
+            array(
+                ':product_id' => $last_id,
+                ':size_id' => $size,
+            )
+        );
+        if (!$insert_size->rowCount()) {
+            throw new Exception('Failed to set size!');
+        }
+
         Header("Location:index.php?add");
     } catch (Exception $e) {
         $error = $e->getMessage();
         return $error;
     }
+}else{
+  $message = 'Please fill out all fields';
 }
-
+}
 // edit products
 function editProducts($id, $image, $title, $desc, $price, $available, $brand, $color, $gender, $sale, $size)
 {
@@ -175,8 +232,6 @@ function editProducts($id, $image, $title, $desc, $price, $available, $brand, $c
       }
       move_uploaded_file($image['tmp_name'], $folderPath. $fileNewName. ".". $file_type);
 
-    }
-
         $query = "UPDATE tbl_products SET ";
         $query .= "products_name = :product_name, ";
         $query .= "products_desc = :product_description, ";
@@ -194,6 +249,24 @@ function editProducts($id, $image, $title, $desc, $price, $available, $brand, $c
             ':product_id' => $id,
           )
         );
+
+      }else{
+        $query = "UPDATE tbl_products SET ";
+        $query .= "products_name = :product_name, ";
+        $query .= "products_desc = :product_description, ";
+        $query .= "products_price = :product_price ";
+        $query .= "WHERE products_id = :product_id ";
+
+        $product_set = $pdo->prepare($query);
+        $product_set->execute(
+          array(
+            ':product_name' => $title,
+            ':product_description' => $desc,
+            ':product_price' => $price,
+            ':product_id' => $id,
+          )
+        );
+      }
         if (!$product_set) {
           $message='failed to edit product!';
           return $message;
@@ -318,49 +391,49 @@ function deleteItem($delete_product_id)
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_brand_query = 'DELETE FROM tbl_prod_brand WHERE products_id = :id';
+  $delete_brand = $pdo->prepare($delete_brand_query);
+  $delete_brand->execute(
     array(
       ':id' => $delete_product_id 
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_color_query = 'DELETE FROM tbl_prod_color WHERE products_id = :id';
+  $delete_color = $pdo->prepare($delete_color_query);
+  $delete_color->execute(
     array(
       ':id' => $delete_product_id 
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_gender_query = 'DELETE FROM tbl_prod_gender WHERE products_id = :id';
+  $delete_gender = $pdo->prepare($delete_gender_query);
+  $delete_gender->execute(
     array(
       ':id' => $delete_product_id 
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_price_query = 'DELETE FROM tbl_prod_price WHERE products_id = :id';
+  $delete_price = $pdo->prepare($delete_price_query);
+  $delete_price->execute(
     array(
       ':id' => $delete_product_id 
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_sale_query = 'DELETE FROM tbl_prod_sale WHERE products_id = :id';
+  $delete_sale = $pdo->prepare($delete_sale_query);
+  $delete_sale->execute(
     array(
       ':id' => $delete_product_id 
     )
   );
 
-  $delete_av_query = 'DELETE FROM tbl_prod_available WHERE products_id = :id';
-  $delete_av = $pdo->prepare($delete_av_query);
-  $delete_av->execute(
+  $delete_size_query = 'DELETE FROM tbl_prod_size WHERE products_id = :id';
+  $delete_size = $pdo->prepare($delete_size_query);
+  $delete_size->execute(
     array(
       ':id' => $delete_product_id 
     )

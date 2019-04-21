@@ -41,7 +41,9 @@ if (isset($_POST['product_update'])) {
   $gender = trim($_POST['gender']);
   $sale = trim($_POST['sale']);
   $size = trim($_POST['size']);
-
+  if (empty($_FILES["image"]["name"])){
+  $image=null;
+}
 
   $result = editProducts($id, $image, $title, $desc, $price, $available, $brand, $color, $gender, $sale, $size);
   $message = $result;
@@ -74,7 +76,7 @@ if (isset($_POST['product_update'])) {
             <img style="width: 30%; padding: 1rem; border: 5px solid black;" src="../images/<?php echo $product['products_img']; ?>" alt="<?php echo $product['products_name'] ?>">
           </div>
           <label for="image">New Product Image:</label>
-          <input type="file" name="image" id="image" value="" required>
+          <input type="file" name="image" id="image" value="">
         </div>
         <div class="form-group">
           <label for="title">New Product Name:</label>
