@@ -1,76 +1,45 @@
 <?php
 require_once 'scripts/config.php';
+require_once 'scripts/connect.php';
 confirm_logged_in();
-
-$gen_tbl          = 'tbl_genre';
-$movie_categories = getAll($gen_tbl);
-
+$tbl = "tbl_categories";
+$product_categories = getAll($tbl);
 if (isset($_POST['submit'])) {
-    $cover   = $_FILES['cover'];
-    $title   = $_POST['title'];
-    $year    = $_POST['year'];
-    $run     = $_POST['run'];
-    $story   = $_POST['story'];
-    $trailer = $_POST['trailer'];
-    $release = $_POST['release'];
-    $genre   = $_POST['genList'];
-    $result  = addMovie($cover, $title, $year, $run, $story, $trailer, $release, $genre);
-    $message = $result;
+  // var_dump($_FILES['cover']);
+  $image = $_FILES['image'];
+  $title = trim($_POST['title']);
+  $desc = trim($_POST['desc']);
+  $price = trim($_POST['price']);
+  $category = trim($_POST['category']);
+  $result = addProduct($image, $title, $desc, $price, $category);
+  $message = $result;
 }
-
 ?>
-
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>SportCheck CMS</title>
-	<link rel="stylesheet" href="../css/header.css">
-	<link rel="stylesheet" href="../css/product.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  </head>
-<nav class="navbar navbar-expand-lg navbar-dark" id="nav">
-        <div class="container">
-            <a class="navbar-brand" href="#" style="color:white;">SportsCheck</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
-                aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../index.php" style="color:white;">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="admin_login.php" style="color:white;">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-	</nav>
-	
-<body class="body">
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
-<header class="head">
-    <div class="container d-flex h-100 align-items-center">
-      <div class="mx-auto text-center">
-        <h1 class="mx-auto my-0 text-uppercase" style="color:white;">SPORTSCHECK CANADA</h1>
-        <h2 class="text-white-50 mx-auto mt-2 mb-5">2019 NEW SALE COMMING SOON</h2>
-      </div>
-    </div>
-  </header>  
+  <title>Add Products</title>
+</head>
 
-<div class="container">
-<div class="row justify-content-center">    	
-  <div class="col-md-4">
-    <div class="card card1" id="productAdd" style="background-color:transparent; border:1px solid white; padding: 2rem; color:white;">
-    <form action="">
-    <div class="form-group" style="background-color:transparent;">
+<body>
+  <br>
+  <div class="container">
+    <a class="btn btn-outline-info" href="./index.php" role="button"><i class="fas fa-arrow-left"></i> Admin Dashboard</a>
+    <br><br>
+    <h1>Add Products</h1>
+    <form action="admin_addproduct.php" method="post" enctype="multipart/form-data">
+
+      <div class="form-group">
         <label for="image">Product Image:</label>
-        <input type="file" name="image" id="image" value="" style="width:100%;">
+        <input type="file" name="image" id="image" value="">
       </div>
       <div class="form-group">
         <label for="title">Product Title:</label>
@@ -78,7 +47,7 @@ if (isset($_POST['submit'])) {
       </div>
       <div class="form-group">
         <label for="desc">Product Description:</label>
-        <textarea class="form-control" id="desc" name="desc" id="desc" rows="3" required></textarea>
+        <textarea class="form-control" name="desc" id="desc" rows="3" required></textarea>
       </div>
       <div class="form-group">
         <label for="price">Product Price:</label>
@@ -88,16 +57,14 @@ if (isset($_POST['submit'])) {
         <label for="category">Product Category</label>
         <select class="form-control" id="category" name="category" required>
           <option>--Select a Category--</option>
+          <?php while ($row = $product_categories->fetch(PDO::FETCH_ASSOC)) : ?>
+            <option value="<?php echo $row['cats_id'] ?>"><?php echo $row['cats_name'] ?></option>
+          <?php endwhile ?>
         </select>
       </div>
-      <button class="btn btn-primary" style="background-color: #FF0002; color:white; border:none;">Submit</button>
+      <button class="btn btn-primary mb-2" type="submit" name="submit">Add Product</button>
     </form>
-    </div>
   </div>
-</div>
-</div>
-
 </body>
-
 
 </html>
