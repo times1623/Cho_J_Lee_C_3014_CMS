@@ -175,7 +175,6 @@ function  addProduct($image, $title, $desc, $price, $available, $brand, $color, 
     }
 }else{
   $message = 'Please fill out all fields';
-  return $message;
 }
 }
 // edit products
@@ -233,8 +232,6 @@ function editProducts($id, $image, $title, $desc, $price, $available, $brand, $c
       }
       move_uploaded_file($image['tmp_name'], $folderPath. $fileNewName. ".". $file_type);
 
-    }
-
         $query = "UPDATE tbl_products SET ";
         $query .= "products_name = :product_name, ";
         $query .= "products_desc = :product_description, ";
@@ -252,6 +249,24 @@ function editProducts($id, $image, $title, $desc, $price, $available, $brand, $c
             ':product_id' => $id,
           )
         );
+
+      }else{
+        $query = "UPDATE tbl_products SET ";
+        $query .= "products_name = :product_name, ";
+        $query .= "products_desc = :product_description, ";
+        $query .= "products_price = :product_price ";
+        $query .= "WHERE products_id = :product_id ";
+
+        $product_set = $pdo->prepare($query);
+        $product_set->execute(
+          array(
+            ':product_name' => $title,
+            ':product_description' => $desc,
+            ':product_price' => $price,
+            ':product_id' => $id,
+          )
+        );
+      }
         if (!$product_set) {
           $message='failed to edit product!';
           return $message;
