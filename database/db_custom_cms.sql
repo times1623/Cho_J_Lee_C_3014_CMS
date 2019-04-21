@@ -1,14 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Apr 21, 2019 at 02:37 AM
--- Server version: 5.7.23
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 21, 2019 at 07:01 AM
+-- Server version: 5.7.21
+-- PHP Version: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `db_custom_cms`
@@ -20,10 +28,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `tbl_available`
 --
 
-CREATE TABLE `tbl_available` (
-  `available_id` mediumint(8) UNSIGNED NOT NULL,
-  `available_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_available`;
+CREATE TABLE IF NOT EXISTS `tbl_available` (
+  `available_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `available_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`available_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_available`
@@ -39,10 +49,12 @@ INSERT INTO `tbl_available` (`available_id`, `available_name`) VALUES
 -- Table structure for table `tbl_brand`
 --
 
-CREATE TABLE `tbl_brand` (
-  `brand_id` mediumint(8) UNSIGNED NOT NULL,
-  `brand_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_brand`;
+CREATE TABLE IF NOT EXISTS `tbl_brand` (
+  `brand_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `brand_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`brand_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_brand`
@@ -63,10 +75,12 @@ INSERT INTO `tbl_brand` (`brand_id`, `brand_name`) VALUES
 -- Table structure for table `tbl_categories`
 --
 
-CREATE TABLE `tbl_categories` (
-  `cats_id` smallint(5) UNSIGNED NOT NULL,
-  `cats_name` varchar(150) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `tbl_categories`;
+CREATE TABLE IF NOT EXISTS `tbl_categories` (
+  `cats_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `cats_name` varchar(150) NOT NULL,
+  PRIMARY KEY (`cats_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_categories`
@@ -87,10 +101,12 @@ INSERT INTO `tbl_categories` (`cats_id`, `cats_name`) VALUES
 -- Table structure for table `tbl_color`
 --
 
-CREATE TABLE `tbl_color` (
-  `color_id` mediumint(8) UNSIGNED NOT NULL,
-  `color_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_color`;
+CREATE TABLE IF NOT EXISTS `tbl_color` (
+  `color_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `color_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`color_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_color`
@@ -109,10 +125,12 @@ INSERT INTO `tbl_color` (`color_id`, `color_name`) VALUES
 -- Table structure for table `tbl_gender`
 --
 
-CREATE TABLE `tbl_gender` (
-  `gender_id` mediumint(8) UNSIGNED NOT NULL,
-  `gender_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_gender`;
+CREATE TABLE IF NOT EXISTS `tbl_gender` (
+  `gender_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `gender_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`gender_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_gender`
@@ -129,19 +147,21 @@ INSERT INTO `tbl_gender` (`gender_id`, `gender_name`) VALUES
 -- Table structure for table `tbl_price`
 --
 
-CREATE TABLE `tbl_price` (
-  `price_id` mediumint(8) UNSIGNED NOT NULL,
-  `price_level` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_price`;
+CREATE TABLE IF NOT EXISTS `tbl_price` (
+  `price_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `price_level` varchar(50) NOT NULL,
+  PRIMARY KEY (`price_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_price`
 --
 
 INSERT INTO `tbl_price` (`price_id`, `price_level`) VALUES
-(1, 'low'),
-(2, 'mid'),
-(3, 'high');
+(1, '0~49'),
+(2, '50~99'),
+(3, '100~');
 
 -- --------------------------------------------------------
 
@@ -149,20 +169,21 @@ INSERT INTO `tbl_price` (`price_id`, `price_level`) VALUES
 -- Table structure for table `tbl_products`
 --
 
-CREATE TABLE `tbl_products` (
-  `products_id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_products`;
+CREATE TABLE IF NOT EXISTS `tbl_products` (
+  `products_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_name` varchar(250) NOT NULL,
   `products_desc` text NOT NULL,
   `products_img` varchar(250) NOT NULL,
-  `products_price` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `products_price` varchar(200) NOT NULL,
+  PRIMARY KEY (`products_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_products`
 --
 
 INSERT INTO `tbl_products` (`products_id`, `products_name`, `products_desc`, `products_img`, `products_price`) VALUES
-(1, 'Helly Hansen Royan Men\'s Shell Jacket', 'A super lightweight packable raincoat in a sleek and stylish business coat design. Ideal for over a suit or business casual attire, this versatile rain jacket is waterproof, windproof, breathable with fully sealed seams and 2.5 ply HELLY TECH® Performance. The fabric is soft and light and the jacket can easily be packet into a briefcase.', 'helly_white.png', '99.88CAD'),
 (2, 'Helly Hansen Men\'s Moss Jacket', 'Inspired by Helly Hansen’s heritage from the city of Moss, comes a line up PU rainwear products that marries traditional design with modern construction and fabrics.', 'helly_yellow.png', '89.99CAD'),
 (3, 'Columbia Men\'s Plus Size Watertight II Shell Jacket', 'Top-notch rain protection in an ultralight package—this packable rain jacket features full seam sealing and a microporous Omni-Tech® fabrication that shields you from wet weather while allowing excess heat and vapor to escape during dynamic activity.', 'columbia_red.png', '109.99CAD'),
 (4, 'The North Face Men\'s Apex Elevation Insulated Softshell', 'Let the elements roll off your back with this windproof, water-repellent soft-shell hooded jacket that delivers insulated, breathable warmth during active winter endeavors.', 'north_black.png', '149.99CAD'),
@@ -204,11 +225,13 @@ INSERT INTO `tbl_products` (`products_id`, `products_name`, `products_desc`, `pr
 -- Table structure for table `tbl_prod_available`
 --
 
-CREATE TABLE `tbl_prod_available` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_available`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_available` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `available_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `available_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_available`
@@ -257,11 +280,13 @@ INSERT INTO `tbl_prod_available` (`id`, `products_id`, `available_id`) VALUES
 -- Table structure for table `tbl_prod_brand`
 --
 
-CREATE TABLE `tbl_prod_brand` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_brand`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_brand` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `brand_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `brand_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_brand`
@@ -310,11 +335,13 @@ INSERT INTO `tbl_prod_brand` (`id`, `products_id`, `brand_id`) VALUES
 -- Table structure for table `tbl_prod_color`
 --
 
-CREATE TABLE `tbl_prod_color` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_color`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_color` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `color_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `color_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_color`
@@ -363,11 +390,13 @@ INSERT INTO `tbl_prod_color` (`id`, `products_id`, `color_id`) VALUES
 -- Table structure for table `tbl_prod_gender`
 --
 
-CREATE TABLE `tbl_prod_gender` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_gender`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_gender` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `gender_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `gender_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_gender`
@@ -416,27 +445,54 @@ INSERT INTO `tbl_prod_gender` (`id`, `products_id`, `gender_id`) VALUES
 -- Table structure for table `tbl_prod_price`
 --
 
-CREATE TABLE `tbl_prod_price` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_price`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_price` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `price_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `price_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_price`
 --
 
 INSERT INTO `tbl_prod_price` (`id`, `products_id`, `price_id`) VALUES
-(1, 1, 2),
-(2, 2, 3),
-(3, 3, 2),
-(4, 4, 2),
+(1, 1, 3),
+(2, 2, 2),
+(3, 3, 3),
+(4, 4, 3),
 (5, 5, 3),
 (6, 6, 3),
 (7, 7, 3),
-(8, 8, 2),
+(8, 8, 3),
 (9, 9, 2),
-(10, 10, 3);
+(10, 10, 3),
+(11, 11, 2),
+(12, 12, 3),
+(13, 13, 3),
+(14, 14, 2),
+(15, 15, 3),
+(16, 16, 3),
+(17, 17, 3),
+(18, 18, 2),
+(19, 19, 2),
+(20, 20, 3),
+(21, 21, 1),
+(22, 22, 2),
+(23, 23, 2),
+(24, 24, 2),
+(25, 25, 2),
+(26, 26, 2),
+(27, 27, 2),
+(28, 28, 1),
+(29, 29, 2),
+(30, 30, 2),
+(31, 31, 2),
+(32, 32, 2),
+(33, 33, 2),
+(34, 34, 1),
+(35, 35, 1);
 
 -- --------------------------------------------------------
 
@@ -444,11 +500,13 @@ INSERT INTO `tbl_prod_price` (`id`, `products_id`, `price_id`) VALUES
 -- Table structure for table `tbl_prod_sale`
 --
 
-CREATE TABLE `tbl_prod_sale` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_sale`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_sale` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `sale_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `sale_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_sale`
@@ -497,11 +555,13 @@ INSERT INTO `tbl_prod_sale` (`id`, `products_id`, `sale_id`) VALUES
 -- Table structure for table `tbl_prod_size`
 --
 
-CREATE TABLE `tbl_prod_size` (
-  `id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_prod_size`;
+CREATE TABLE IF NOT EXISTS `tbl_prod_size` (
+  `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `products_id` mediumint(9) NOT NULL,
-  `size_id` mediumint(9) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `size_id` mediumint(9) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_prod_size`
@@ -519,39 +579,27 @@ INSERT INTO `tbl_prod_size` (`id`, `products_id`, `size_id`) VALUES
 (9, 9, 4),
 (10, 10, 3),
 (11, 11, 7),
-(12, 11, 6),
 (13, 12, 7),
-(14, 12, 6),
 (15, 13, 8),
 (16, 14, 7),
-(17, 14, 6),
 (18, 15, 7),
-(19, 15, 9),
-(20, 15, 8),
 (21, 16, 3),
 (22, 17, 2),
-(23, 17, 3),
 (24, 18, 3),
-(25, 18, 4),
 (26, 19, 2),
 (27, 20, 3),
-(28, 20, 4),
 (29, 21, 6),
 (30, 22, 7),
 (31, 23, 7),
 (32, 24, 6),
 (33, 25, 8),
-(34, 25, 7),
 (35, 26, 2),
 (36, 27, 3),
-(37, 27, 2),
 (38, 28, 4),
 (39, 29, 3),
 (40, 30, 4),
-(41, 30, 3),
 (42, 31, 2),
 (43, 32, 4),
-(44, 32, 2),
 (45, 33, 3),
 (46, 34, 4),
 (47, 35, 3);
@@ -562,10 +610,12 @@ INSERT INTO `tbl_prod_size` (`id`, `products_id`, `size_id`) VALUES
 -- Table structure for table `tbl_sale`
 --
 
-CREATE TABLE `tbl_sale` (
-  `sale_id` mediumint(8) UNSIGNED NOT NULL,
-  `sale_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_sale`;
+CREATE TABLE IF NOT EXISTS `tbl_sale` (
+  `sale_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `sale_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`sale_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_sale`
@@ -581,10 +631,12 @@ INSERT INTO `tbl_sale` (`sale_id`, `sale_name`) VALUES
 -- Table structure for table `tbl_size`
 --
 
-CREATE TABLE `tbl_size` (
-  `size_id` mediumint(8) UNSIGNED NOT NULL,
-  `size_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+DROP TABLE IF EXISTS `tbl_size`;
+CREATE TABLE IF NOT EXISTS `tbl_size` (
+  `size_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `size_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`size_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_size`
@@ -608,235 +660,27 @@ INSERT INTO `tbl_size` (`size_id`, `size_name`) VALUES
 -- Table structure for table `tbl_users`
 --
 
-CREATE TABLE `tbl_users` (
-  `user_id` mediumint(8) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `tbl_users`;
+CREATE TABLE IF NOT EXISTS `tbl_users` (
+  `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_fname` varchar(250) NOT NULL,
   `user_name` varchar(250) NOT NULL,
   `user_pass` varchar(250) NOT NULL,
   `user_email` varchar(250) NOT NULL,
   `user_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `user_ip` varchar(50) NOT NULL DEFAULT 'no',
-  `user_login_time` datetime DEFAULT NULL,
-  `user_failed_login` int(3) DEFAULT '0',
-  `user_failed_login_time` datetime DEFAULT NULL,
-  `user_active` tinyint(3) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `user_lock` varchar(50) NOT NULL DEFAULT 'no',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_name`, `user_pass`, `user_email`, `user_date`, `user_ip`, `user_login_time`, `user_failed_login`, `user_failed_login_time`, `user_active`) VALUES
-(24, 'admin', 'admin', '$2y$10$w..4e1K8eFGE3acyPsjgvubeXycxSPvTbzem9RsHcYYunZ8bnJtl6', 'admin@test.com', '2019-04-15 16:29:07', '::1', '2019-04-20 16:33:36', 0, NULL, 0);
+INSERT INTO `tbl_users` (`user_id`, `user_fname`, `user_name`, `user_pass`, `user_email`, `user_date`, `user_ip`, `user_lock`) VALUES
+(24, 'admin', 'admin', '$2y$10$OYlRwSS3148zjJeOEYHHFOlYOLpD26422mV2tpBgErsVIRliEyEbi', 'admin@admin', '2019-04-21 07:00:52', '::1', 'no');
+COMMIT;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `tbl_available`
---
-ALTER TABLE `tbl_available`
-  ADD PRIMARY KEY (`available_id`);
-
---
--- Indexes for table `tbl_brand`
---
-ALTER TABLE `tbl_brand`
-  ADD PRIMARY KEY (`brand_id`);
-
---
--- Indexes for table `tbl_categories`
---
-ALTER TABLE `tbl_categories`
-  ADD PRIMARY KEY (`cats_id`);
-
---
--- Indexes for table `tbl_color`
---
-ALTER TABLE `tbl_color`
-  ADD PRIMARY KEY (`color_id`);
-
---
--- Indexes for table `tbl_gender`
---
-ALTER TABLE `tbl_gender`
-  ADD PRIMARY KEY (`gender_id`);
-
---
--- Indexes for table `tbl_price`
---
-ALTER TABLE `tbl_price`
-  ADD PRIMARY KEY (`price_id`);
-
---
--- Indexes for table `tbl_products`
---
-ALTER TABLE `tbl_products`
-  ADD PRIMARY KEY (`products_id`);
-
---
--- Indexes for table `tbl_prod_available`
---
-ALTER TABLE `tbl_prod_available`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_brand`
---
-ALTER TABLE `tbl_prod_brand`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_color`
---
-ALTER TABLE `tbl_prod_color`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_gender`
---
-ALTER TABLE `tbl_prod_gender`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_price`
---
-ALTER TABLE `tbl_prod_price`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_sale`
---
-ALTER TABLE `tbl_prod_sale`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_prod_size`
---
-ALTER TABLE `tbl_prod_size`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tbl_sale`
---
-ALTER TABLE `tbl_sale`
-  ADD PRIMARY KEY (`sale_id`);
-
---
--- Indexes for table `tbl_size`
---
-ALTER TABLE `tbl_size`
-  ADD PRIMARY KEY (`size_id`);
-
---
--- Indexes for table `tbl_users`
---
-ALTER TABLE `tbl_users`
-  ADD PRIMARY KEY (`user_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `tbl_available`
---
-ALTER TABLE `tbl_available`
-  MODIFY `available_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_brand`
---
-ALTER TABLE `tbl_brand`
-  MODIFY `brand_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_categories`
---
-ALTER TABLE `tbl_categories`
-  MODIFY `cats_id` smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT for table `tbl_color`
---
-ALTER TABLE `tbl_color`
-  MODIFY `color_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `tbl_gender`
---
-ALTER TABLE `tbl_gender`
-  MODIFY `gender_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_price`
---
-ALTER TABLE `tbl_price`
-  MODIFY `price_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `tbl_products`
---
-ALTER TABLE `tbl_products`
-  MODIFY `products_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_prod_available`
---
-ALTER TABLE `tbl_prod_available`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_prod_brand`
---
-ALTER TABLE `tbl_prod_brand`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_prod_color`
---
-ALTER TABLE `tbl_prod_color`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_prod_gender`
---
-ALTER TABLE `tbl_prod_gender`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
-
---
--- AUTO_INCREMENT for table `tbl_prod_price`
---
-ALTER TABLE `tbl_prod_price`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tbl_prod_sale`
---
-ALTER TABLE `tbl_prod_sale`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
---
--- AUTO_INCREMENT for table `tbl_prod_size`
---
-ALTER TABLE `tbl_prod_size`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
-
---
--- AUTO_INCREMENT for table `tbl_sale`
---
-ALTER TABLE `tbl_sale`
-  MODIFY `sale_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_size`
---
-ALTER TABLE `tbl_size`
-  MODIFY `size_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `tbl_users`
---
-ALTER TABLE `tbl_users`
-  MODIFY `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

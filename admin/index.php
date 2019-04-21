@@ -1,10 +1,9 @@
 <?php
 require_once 'scripts/config.php';
 confirm_logged_in();
-greeting();
 
 $results = getAll('tbl_products');
-$message = greeting();
+
 
 
 ?>
@@ -52,13 +51,11 @@ $message = greeting();
               <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
                 <a href="admin_editproduct.php?product=<?php echo $row['products_id'] ?>">
-                  <button  type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
+                  <button  type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                 </a>
                 <a href="admin_deleteproduct.php?delete=<?php echo $row['products_id'] ?>">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                 </a>
-                 
-        
       
                 </div>
                 <small class="text-muted">9 mins</small>

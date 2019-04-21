@@ -10,22 +10,20 @@ $tb1 = "tbl_products";
 $col = "products_id";
 // Get product info
 $found_product = getSingle($tb1, $col, $id);
-// categories
-// available in store
+
 $tbl_1 = "tbl_available";
 $tbl_2 = "tbl_brand";
 $tbl_3 = "tbl_color";
 $tbl_4 = "tbl_gender";
-$tbl_5 = "tbl_price";
-$tbl_6 = "tbl_products";
+$tbl_6 = "tbl_sale";
+$tbl_7 = "tbl_size";
 
 $product_available = getAll($tbl_1);
 $product_brand = getAll($tbl_2);
 $product_color = getAll($tbl_3);
 $product_gender = getAll($tbl_4);
-$product_price = getAll($tbl_5);
-$product_products = getAll($tbl_6);
-
+$product_sale = getAll($tbl_6);
+$product_size = getAll($tbl_7);
 
 
 if (is_string($found_product)) {
@@ -37,8 +35,15 @@ if (isset($_POST['product_update'])) {
   $title = trim($_POST['title']);
   $desc = trim($_POST['desc']);
   $price = trim($_POST['price']);
-  $category = trim($_POST['category']);
-  $result = editProduct($image, $title, $desc, $price, $category);
+  $available = trim($_POST['available']);
+  $brand = trim($_POST['brand']);
+  $color = trim($_POST['color']);
+  $gender = trim($_POST['gender']);
+  $sale = trim($_POST['sale']);
+  $size = trim($_POST['size']);
+
+
+  $result = editProducts($id, $image, $title, $desc, $price, $available, $brand, $color, $gender, $sale, $size);
   $message = $result;
 }
 ?>
@@ -101,7 +106,39 @@ if (isset($_POST['product_update'])) {
             <?php endwhile ?>
           </select>
 
-        
+          <select class="form-control" id="category_gender" name="gender">
+            <option>--gender--</option>
+            <?php while ($row = $product_gender->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['gender_id'] ?>"><?php echo $row['gender_name'] ?></option>
+            <?php endwhile ?>
+          </select>
+
+          <select class="form-control" id="category_sale" name="sale">
+            <option>--on sale?--</option>
+            <?php while ($row = $product_sale->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['sale_id'] ?>"><?php echo $row['sale_name'] ?></option>
+            <?php endwhile ?>
+          </select>
+
+          <select class="form-control" id="category_size" name="size">
+            <option>--size--</option>
+            <?php while ($row = $product_size->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['size_id'] ?>"><?php echo $row['size_name'] ?></option>
+            <?php endwhile ?>
+          </select>
+
+          <select class="form-control" id="category_color" name="color">
+            <option>--color--</option>
+            <?php while ($row = $product_color->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['color_id'] ?>"><?php echo $row['color_name'] ?></option>
+            <?php endwhile ?>
+          </select>
+
+         
+
+   
+
+     
         </div>
         <button class="btn btn-primary mb-2" type="submit" name="product_update">Edit Product</button>
       </form>
