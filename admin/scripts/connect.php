@@ -2,7 +2,7 @@
 
 $db_dsn = array(
     'host' => 'localhost',
-    'dbname' => 'db_custom_CMS',
+    'dbname' => 'db_custom_cms',
     'charset' => 'utf8',
 );
 // This is the db credentials

@@ -5,7 +5,7 @@ greeting();
 
 $products = getAll('tbl_products');
 $message = greeting();
-$date = date_create($_SESSION['users_login_time']);
+
 $readable_date = (date_format($date, ' l jS F Y \a\t g:ia'));
 if (isset($_GET['success'])) {
   echo "<h3 style='color:red;'>This: <span style='color:blue;'>" . $_GET['success'] . "</span> is the system generated password for the new user. Make sure to copy it to be able to login and change it later.</h3>";

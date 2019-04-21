@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Apr 21, 2019 at 12:52 AM
+-- Generation Time: Apr 21, 2019 at 02:37 AM
 -- Server version: 5.7.23
 -- PHP Version: 7.2.8
 
@@ -54,7 +54,8 @@ INSERT INTO `tbl_brand` (`brand_id`, `brand_name`) VALUES
 (3, 'Adidas'),
 (4, 'Nike'),
 (5, 'Columbia'),
-(6, 'North Face');
+(6, 'North Face'),
+(7, 'New Balance');
 
 -- --------------------------------------------------------
 
@@ -170,7 +171,32 @@ INSERT INTO `tbl_products` (`products_id`, `products_name`, `products_desc`, `pr
 (7, 'ASICS Men\'s GT 2000 6 Running Shoes', 'Less weight, enhanced cushioning, and more energy with every step, the GT-2000™ 6 model delivers optimized performance and high-mileage durability. A widened forefoot accommodates bunions and reduces irritation, while the upper incorporates a better heel-fit to keep you locked down plus improved toe-spring for a smoother transition. The DuoMax® support system and heel-to-toe GEL® cushioning offer protective stability that absorbs shock on any surface. Weight: 10.5. Heel Height: 22mm. Forefoot Height: 12mm.', 'asics_yellow.png', '126.95CAD'),
 (8, 'Nike Men\'s Air Zoom Pegasus 35 Shield Running Shoes', 'The Nike Air Zoom Pegasus 35 Shield Men\'s Running Shoe gets remixed to conquer wet, dark routes. A water-repellent upper helps keep your feet dry. Reflective elements combine with an outsole that gives optimal grip on wet surfaces – letting you run in confidence despite the weather.', 'nike_green.png', '122.95CAD'),
 (9, 'ASICS Men\'s GT 2000 6 Running Shoes ', 'Less weight, enhanced cushioning, and more energy with every step, the GT-2000™ 6 model delivers optimized performance and high-mileage durability. A widened forefoot accommodates bunions and reduces irritation, while the upper incorporates a better heel-fit to keep you locked down plus improved toe-spring for a smoother transition. The DuoMax® support system and heel-to-toe GEL® cushioning offer protective stability that absorbs shock on any surface.', 'asics_red.png', '89.99CAD'),
-(10, 'Adidas Men\'s Asweego CC Running Shoes', 'Stay cool while you train. These running shoes offer relief as your run heats up with an innovative ventilating design. Built with a lightweight mesh upper, they have a TPU window that keeps air circulating. Plush cushioning delivers pillow-soft comfort to every step.', 'adidas_black.png', '169.99CAD');
+(10, 'Adidas Men\'s Asweego CC Running Shoes', 'Stay cool while you train. These running shoes offer relief as your run heats up with an innovative ventilating design. Built with a lightweight mesh upper, they have a TPU window that keeps air circulating. Plush cushioning delivers pillow-soft comfort to every step.', 'adidas_black.png', '169.99CAD'),
+(11, 'Nike Sportswear Women\'s Woven Jacket', 'The Nike Sportswear Women’s Woven Jacket is designed with a large hood and mesh lining to help you stay dry and comfortable in style.', 'nike_w_jacket.png', '80CAD'),
+(12, 'Columbia Women\'s Arcadia II 2L Shell Jacket', 'You’ll be prepared for wet conditions with this shell jacket by Columbia. With an adjustable hood and drawcord waist, rain and cold are kept at bay for optimal warmth. Zippered hand pockets keep essentials safe and protected, and when the weather improves, fold this jacket down and store it in an area as small as a hand pocket.', 'columbia_y_jacket.png', '99.99CAD'),
+(13, 'Columbia Women\'s Plus Size Arcadia II 2L Shell Jacket', 'Waterproof, breathable and packable, this rainy-day-MVP women’s jacket is built to shield you from rain out on the trail and then stow away into a corner of your pack when the sun returns. An Omni-Tech® membrane combines with full seam sealing and a soft mesh lining to keep you dry and comfortable both on the exterior and interior.', 'columbia_r._jacket.png', '109.99CAD'),
+(14, 'Helly Hansen Women\'s Halifax Crew Hooded Jacket', 'Stay dry and warm on wet or windy days in the Helly Hansen Halifax women\'s hooded jacket. With breathable waterproofing and windproofing, this smart jacket features full seam sealing to prevent warm air escape. The water repellant finish provides an added barrier of protection, complemented by the durable 2-ply construction.', 'helly_g_jacket.png', '94.98CAD'),
+(15, 'Helly Hansen Women\'s Seven J Shell Jacket', 'You\'ll keep warm and dry in this outdoor rainwear jacket with plenty of features to keep the wet weather at bay. Adjustable cuffs and a bottom hem cinch cord provide plenty of comfort. A full coverage hood and front storm flap will keep water away whether you\'re out hiking on the trail or camping.', 'helly_b_jacket.png', '119.99CAD'),
+(16, 'Nike Women\'s Air Zoom Structure 22 Running Shoes', 'The Nike Women’s Air Zoom Structure 22 Running Shoe looks fast and feels secure. Engineered mesh, a heel overlay and dynamic support throughout the midfoot all work together to provide a smooth, stable ride.', 'nike_r_shoe.png', '164.99CAD'),
+(17, 'New Balance Women\'s Lazr V2 Running Shoes ', 'The New Balance Women’s Lazr V2 Running Shoe is an everyday running shoe that features a sleek design with a balance of cushioning and responsiveness. Updated for an improved fit, the Lazr Hypoknit v2 secures the foot in place while also offering a softer, more sock-like feel. The data specific laser engravings in the Fresh Foam midsole provide localized softness and support, and the dynamic fit of the redesigned upper secures the foot in place with plush comfort. Whether on the road or running errands around town, the Lazr Hypoknit is guaranteed to get you there looking good and feeling great.', 'newb_b_shoe.png', '124.99CAD'),
+(18, 'ASICS Women\'s GEL Exalt 4 Running Shoes ', 'Endorsed by the American Podiatric Medical Association, the ASICS  Women\'s GEL Exalt 4 Running Shoes utilizes advanced midsole materials and rearfoot GEL® cushioning to deliver optimal comfort, responsive bounceback and all-day support in a lightweight package.', 'asics_g_shoe.png', '89.99CAD'),
+(19, 'ASICS Women\'s GEL Cumulus 19 Running Shoes', 'Featuring our Convergence GEL® technology and Rearfoot GEL® technology cushioning system, the ASICS Women\'s GEL Cumulus 19 Running Shoes delivers superior comfort and shock dissipation, while enhancing foot function for a smooth ride. The GEL-Cumulus® 19 model also sports a contemporized upper to signal the latest generation.', 'asics_w_shoe.png', '89.99CAD'),
+(20, 'New Balance Women\'s W890V7 Running Shoes', 'Youll find yourself reaching for the New Balance 890v7 over and over again. This go-to trainer for serious runners features responsive technology and a gusseted tongue to help offer a snug midfoot fit. Its minimal design makes it the perfect for both daily trainings or trips to the gym.', 'newb_g_shoe.png', '149.99CAD'),
+(21, 'Columbia Boys\' Rain-Zilla Rain Jacket', 'Put your little, puddle-stomping monster into a Rain-Zilla jacket and tell him a little rain is good for him, because it is. The microfleece lining and waterproof fabric will keep him warm, dry and ready to roll.', 'col_b_kid_jacket.png', '31.88CAD'),
+(22, 'Columbia Boys\' Rain-Zilla Jacket', 'Perfect for keeping him comfortable and protected in wet weather, this jacket features waterproof fabric, an adjustable hood, and soft microfleece lining.', 'col_g_kid_jacket.png', '64.99CAD'),
+(23, 'Columbia Boys\' Endless Explorer Fleece Lined Rain Jacket', 'Make sure your endless explorer is ready for summer squalls. Crafted of a critically seam-sealed waterproof fabric and lined with cozy fleece, this lightweight jacket will ensure he’s ready for whatever Mother Nature has in store. Adjustable storm hood, elastic cuffs, articulated elbows, and chin guard deliver added comfort and protection, while reflective details boost nighttime visibility.', 'col_bl_kid_jacket.png', '58.97CAD'),
+(24, 'Nike Sportswear Boys\' HD Windrunner Jacket', 'With water-repellent ripstop fabric and a shaped hood, the Boys’ Nike Sportswear Windrunner Jacket delivers lightweight coverage from the elements. The full-zip design is lined for comfort and includes a back vent for breathability.', 'nike_w_kid_jacket.png', '80.00CAD'),
+(25, 'Nike Boys\' Sportswear Windrunner GFX Jacket', 'Nike Sportswear Windrunner Boys\' Graphic Jacket\r\nWith water-repellent fabric and a hood that zips to the chin, the Nike Sportswear Windrunner Boys\' Graphic Jacket delivers lightweight coverage from the elements. It\'s lined for comfort and includes zippered pockets for secure storage.', 'nike_r_kid_jacket.png', '80.00CAD'),
+(26, 'Adidas Kids\' Superstar Foundation Grade School Shoes', 'Have your little one looking Old School cool in the adidas Kids\' Superstar Foundation Grade School Casual Shoes - White/Black, a grade school kids\' sized version of the legendary basketball shoe from the 1970s. Full-grain leather uppers provide flexibility and a luxurious fit, while a rubber shell toe limits wear for lasting durability.', 'adidas_w_kid_shoe.png', '84.99CAD'),
+(27, 'Adidas Girls\' Superstar Grade School Casual Shoes ', 'Inspired by the original Superstar from the 1970s but reinvented in a modern colourway that appeals to grade school girls’ tastes, the adidas Girls’ Superstar Grade School Casual Shoes - White/Pink has a retro design she’ll love to show off. And because the toes of the full-grain leather sneakers are protected with rubber shells, she’ll be able to step out and make an Old School style statement again and again.', 'adidas_r_kid_shoe.png', '62.97CAD'),
+(28, 'Adidas Kids\' Superstar C Preschool Shoes', 'A small take on a big style. These kids\' kicks scale down the clean lines and effortless style of the famed adidas Superstar shoes. They\'re made of smooth leather with a mesh lining for breathable comfort. Optional elastic laces make this pair easy to slip on and off.', 'adidas_wh_kid_shoe.png', '44.97CAD'),
+(29, 'Adidas Kids\' Superstar Foundation Grade School Shoes', 'Have your little one looking Old School cool in the adidas Kids\' Superstar Foundation Grade School Casual Shoes - White/Black, a grade school kids\' sized version of the legendary basketball shoe from the 1970s. Full-grain leather uppers provide flexibility and a luxurious fit, while a rubber shell toe limits wear for lasting durability.', 'adidas_b_kid_shoe.png', '84.99CAD'),
+(30, 'Adidas Girls\' Superstar Shoes', 'Turn your street style up a notch in these juniors\' shoes. An iridescent heel patch and 3-Stripes add a fun touch of shine to these iconic \'70s trainers. The classic shell toe and rubber cupsole complete the look.', 'adidas_wh_kid_girl_shoe.png', '89.99CAD'),
+(31, 'Adidas Kids\' Predator 18.3 Firm Ground Outdoor Soccer Cleats ', 'Your creativity is dominating. Now prove it. Pull the strings and control the outcome of the game. You choose who, when and where, you dictate what happens next. Master control with Predator. These juniors’ soccer cleats have a synthetic upper that’s anatomically designed to lock down your feet as you lock onto goal. Hybrid stud tips let you move with instinct on firm ground.', 'kid_soccer_r.png', '66.97CAD'),
+(32, 'Adidas Kids\' Predator 18.3 Firm Ground Outdoor Soccer Cleats', 'Your creativity is dominating. Now prove it. Pull the strings and control the outcome of the game. You choose who, when and where, you dictate what happens next. Master control with Predator. These juniors’ soccer cleats have a synthetic upper that’s anatomically designed to lock down your feet as you lock onto goal. Hybrid stud tips let you move with instinct on firm ground.', 'kid_soccer_g.png', '64.97CAD'),
+(33, 'Nike Boys\' Grade School Phantom VSN Academy DF Firm Ground Shoes', 'The Nike Boys’ Grade School Phantom VSN Academy Dynamic Fit Firm Ground Shoe brings the fierce precision of street play to the pitch. A foot-hugging bootie is concealed in a synthetic outer layer to create a boot for the finishers, the providers and the battlers of tomorrow’s game.', 'nike_soccer_b.png', '79.99CAD'),
+(34, 'Adidas Kids\' Nemeziz Messi 17.4 Firm Ground Outdoor Soccer Cleats', 'Sew the defense. Find space where you do not have it. Go ahead when you think you\'re going to retreat. Improvise when you think you\'re going to quit. Turn instinct into action and skeptics into witnesses. Get out in the front with Nemeziz in the foot. This kids\' boot shoe features Agility Touch Skin for quick movements on any set. The FG soldering was developed for explosive acceleration in solid surface, artificial grass and hard surface fields.', 'adidas_soccer_w.png', '34.97CAD'),
+(35, 'Adidas Kids\' X 16.4 FG Outdoor Soccer Cleats', 'Give your young star the ability to move at faster speeds without compromising control with the adidas Kids\' X 16.4 FG Outdoor Soccer Cleats - Red/Black. These ultra light grade school kids\' soccer boots are optimized for play on all types of outdoor surfaces and feature Chaos Feel uppers that will give him a better sense of the ball.', 'adidas_soccer_r.png', '34.88CAD');
 
 -- --------------------------------------------------------
 
@@ -180,7 +206,7 @@ INSERT INTO `tbl_products` (`products_id`, `products_name`, `products_desc`, `pr
 
 CREATE TABLE `tbl_prod_available` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `available_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -188,7 +214,7 @@ CREATE TABLE `tbl_prod_available` (
 -- Dumping data for table `tbl_prod_available`
 --
 
-INSERT INTO `tbl_prod_available` (`id`, `product_id`, `available_id`) VALUES
+INSERT INTO `tbl_prod_available` (`id`, `products_id`, `available_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1),
@@ -198,7 +224,32 @@ INSERT INTO `tbl_prod_available` (`id`, `product_id`, `available_id`) VALUES
 (7, 7, 1),
 (8, 8, 1),
 (9, 9, 1),
-(10, 10, 1);
+(10, 10, 1),
+(11, 11, 1),
+(12, 12, 1),
+(13, 13, 2),
+(14, 14, 1),
+(15, 15, 2),
+(16, 16, 2),
+(17, 17, 2),
+(18, 18, 1),
+(19, 19, 1),
+(20, 20, 2),
+(21, 21, 1),
+(22, 22, 1),
+(23, 23, 2),
+(24, 24, 2),
+(25, 25, 2),
+(26, 26, 1),
+(27, 27, 1),
+(28, 28, 1),
+(29, 29, 2),
+(30, 30, 1),
+(31, 31, 2),
+(32, 32, 2),
+(33, 33, 1),
+(34, 34, 1),
+(35, 35, 1);
 
 -- --------------------------------------------------------
 
@@ -208,7 +259,7 @@ INSERT INTO `tbl_prod_available` (`id`, `product_id`, `available_id`) VALUES
 
 CREATE TABLE `tbl_prod_brand` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `brand_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -216,7 +267,7 @@ CREATE TABLE `tbl_prod_brand` (
 -- Dumping data for table `tbl_prod_brand`
 --
 
-INSERT INTO `tbl_prod_brand` (`id`, `product_id`, `brand_id`) VALUES
+INSERT INTO `tbl_prod_brand` (`id`, `products_id`, `brand_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 5),
@@ -226,7 +277,32 @@ INSERT INTO `tbl_prod_brand` (`id`, `product_id`, `brand_id`) VALUES
 (7, 7, 2),
 (8, 8, 4),
 (9, 9, 2),
-(10, 10, 3);
+(10, 10, 3),
+(11, 11, 4),
+(12, 12, 5),
+(13, 13, 5),
+(14, 14, 1),
+(15, 15, 1),
+(16, 16, 4),
+(17, 17, 7),
+(18, 18, 3),
+(19, 19, 3),
+(20, 20, 7),
+(21, 21, 5),
+(22, 22, 5),
+(23, 23, 5),
+(24, 24, 4),
+(25, 25, 4),
+(26, 26, 3),
+(27, 27, 3),
+(28, 28, 3),
+(29, 29, 3),
+(30, 30, 3),
+(31, 31, 3),
+(32, 32, 3),
+(33, 33, 4),
+(34, 34, 3),
+(35, 35, 3);
 
 -- --------------------------------------------------------
 
@@ -236,7 +312,7 @@ INSERT INTO `tbl_prod_brand` (`id`, `product_id`, `brand_id`) VALUES
 
 CREATE TABLE `tbl_prod_color` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `color_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -244,7 +320,7 @@ CREATE TABLE `tbl_prod_color` (
 -- Dumping data for table `tbl_prod_color`
 --
 
-INSERT INTO `tbl_prod_color` (`id`, `product_id`, `color_id`) VALUES
+INSERT INTO `tbl_prod_color` (`id`, `products_id`, `color_id`) VALUES
 (1, 1, 2),
 (2, 2, 1),
 (3, 3, 5),
@@ -254,7 +330,32 @@ INSERT INTO `tbl_prod_color` (`id`, `product_id`, `color_id`) VALUES
 (7, 7, 1),
 (8, 8, 4),
 (9, 9, 5),
-(10, 10, 3);
+(10, 10, 3),
+(11, 11, 2),
+(12, 12, 1),
+(13, 13, 5),
+(14, 14, 4),
+(15, 15, 3),
+(16, 16, 5),
+(17, 17, 3),
+(18, 18, 4),
+(19, 19, 2),
+(20, 20, 4),
+(21, 21, 3),
+(22, 22, 4),
+(23, 23, 3),
+(24, 24, 2),
+(25, 25, 1),
+(26, 26, 2),
+(27, 27, 5),
+(28, 28, 2),
+(29, 29, 3),
+(30, 30, 2),
+(31, 31, 5),
+(32, 32, 4),
+(33, 33, 3),
+(34, 34, 2),
+(35, 35, 5);
 
 -- --------------------------------------------------------
 
@@ -264,7 +365,7 @@ INSERT INTO `tbl_prod_color` (`id`, `product_id`, `color_id`) VALUES
 
 CREATE TABLE `tbl_prod_gender` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `gender_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -272,7 +373,7 @@ CREATE TABLE `tbl_prod_gender` (
 -- Dumping data for table `tbl_prod_gender`
 --
 
-INSERT INTO `tbl_prod_gender` (`id`, `product_id`, `gender_id`) VALUES
+INSERT INTO `tbl_prod_gender` (`id`, `products_id`, `gender_id`) VALUES
 (1, 1, 1),
 (2, 2, 1),
 (3, 3, 1),
@@ -282,7 +383,32 @@ INSERT INTO `tbl_prod_gender` (`id`, `product_id`, `gender_id`) VALUES
 (7, 7, 1),
 (8, 8, 1),
 (9, 9, 1),
-(10, 10, 1);
+(10, 10, 1),
+(11, 11, 2),
+(12, 12, 2),
+(13, 13, 2),
+(14, 14, 2),
+(15, 15, 2),
+(16, 16, 2),
+(17, 17, 2),
+(18, 18, 2),
+(19, 19, 2),
+(20, 20, 2),
+(21, 21, 3),
+(22, 22, 3),
+(23, 23, 3),
+(24, 24, 3),
+(25, 25, 3),
+(26, 26, 3),
+(27, 27, 3),
+(28, 28, 3),
+(29, 29, 3),
+(30, 30, 3),
+(31, 31, 3),
+(32, 32, 3),
+(33, 33, 3),
+(34, 34, 3),
+(35, 35, 3);
 
 -- --------------------------------------------------------
 
@@ -292,7 +418,7 @@ INSERT INTO `tbl_prod_gender` (`id`, `product_id`, `gender_id`) VALUES
 
 CREATE TABLE `tbl_prod_price` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `price_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -300,7 +426,7 @@ CREATE TABLE `tbl_prod_price` (
 -- Dumping data for table `tbl_prod_price`
 --
 
-INSERT INTO `tbl_prod_price` (`id`, `product_id`, `price_id`) VALUES
+INSERT INTO `tbl_prod_price` (`id`, `products_id`, `price_id`) VALUES
 (1, 1, 2),
 (2, 2, 3),
 (3, 3, 2),
@@ -320,7 +446,7 @@ INSERT INTO `tbl_prod_price` (`id`, `product_id`, `price_id`) VALUES
 
 CREATE TABLE `tbl_prod_sale` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `sale_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -328,7 +454,7 @@ CREATE TABLE `tbl_prod_sale` (
 -- Dumping data for table `tbl_prod_sale`
 --
 
-INSERT INTO `tbl_prod_sale` (`id`, `product_id`, `sale_id`) VALUES
+INSERT INTO `tbl_prod_sale` (`id`, `products_id`, `sale_id`) VALUES
 (1, 1, 2),
 (2, 2, 2),
 (3, 3, 2),
@@ -338,7 +464,32 @@ INSERT INTO `tbl_prod_sale` (`id`, `product_id`, `sale_id`) VALUES
 (7, 7, 1),
 (8, 8, 1),
 (9, 9, 2),
-(10, 10, 1);
+(10, 10, 1),
+(11, 11, 2),
+(12, 12, 2),
+(13, 13, 2),
+(14, 14, 2),
+(15, 15, 2),
+(16, 16, 1),
+(17, 17, 2),
+(18, 18, 1),
+(19, 19, 1),
+(20, 20, 2),
+(21, 21, 2),
+(22, 22, 2),
+(23, 23, 2),
+(24, 24, 2),
+(25, 25, 2),
+(26, 26, 1),
+(27, 27, 2),
+(28, 28, 2),
+(29, 29, 2),
+(30, 30, 2),
+(31, 31, 2),
+(32, 32, 1),
+(33, 33, 2),
+(34, 34, 2),
+(35, 35, 2);
 
 -- --------------------------------------------------------
 
@@ -348,7 +499,7 @@ INSERT INTO `tbl_prod_sale` (`id`, `product_id`, `sale_id`) VALUES
 
 CREATE TABLE `tbl_prod_size` (
   `id` mediumint(8) UNSIGNED NOT NULL,
-  `product_id` mediumint(9) NOT NULL,
+  `products_id` mediumint(9) NOT NULL,
   `size_id` mediumint(9) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -356,17 +507,54 @@ CREATE TABLE `tbl_prod_size` (
 -- Dumping data for table `tbl_prod_size`
 --
 
-INSERT INTO `tbl_prod_size` (`id`, `product_id`, `size_id`) VALUES
-(1, 1, 3),
-(2, 2, 4),
-(3, 3, 2),
-(4, 4, 4),
-(5, 5, 2),
+INSERT INTO `tbl_prod_size` (`id`, `products_id`, `size_id`) VALUES
+(1, 1, 7),
+(2, 2, 9),
+(3, 3, 8),
+(4, 4, 7),
+(5, 5, 10),
 (6, 6, 3),
 (7, 7, 1),
 (8, 8, 3),
 (9, 9, 4),
-(10, 10, 3);
+(10, 10, 3),
+(11, 11, 7),
+(12, 11, 6),
+(13, 12, 7),
+(14, 12, 6),
+(15, 13, 8),
+(16, 14, 7),
+(17, 14, 6),
+(18, 15, 7),
+(19, 15, 9),
+(20, 15, 8),
+(21, 16, 3),
+(22, 17, 2),
+(23, 17, 3),
+(24, 18, 3),
+(25, 18, 4),
+(26, 19, 2),
+(27, 20, 3),
+(28, 20, 4),
+(29, 21, 6),
+(30, 22, 7),
+(31, 23, 7),
+(32, 24, 6),
+(33, 25, 8),
+(34, 25, 7),
+(35, 26, 2),
+(36, 27, 3),
+(37, 27, 2),
+(38, 28, 4),
+(39, 29, 3),
+(40, 30, 4),
+(41, 30, 3),
+(42, 31, 2),
+(43, 32, 4),
+(44, 32, 2),
+(45, 33, 3),
+(46, 34, 4),
+(47, 35, 3);
 
 -- --------------------------------------------------------
 
@@ -407,7 +595,12 @@ INSERT INTO `tbl_size` (`size_id`, `size_name`) VALUES
 (2, '8'),
 (3, '9'),
 (4, '10'),
-(5, '11');
+(5, '11'),
+(6, 'S'),
+(7, 'M'),
+(8, 'X'),
+(9, 'XL'),
+(10, 'XXL');
 
 -- --------------------------------------------------------
 
@@ -556,7 +749,7 @@ ALTER TABLE `tbl_available`
 -- AUTO_INCREMENT for table `tbl_brand`
 --
 ALTER TABLE `tbl_brand`
-  MODIFY `brand_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `brand_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_categories`
@@ -586,31 +779,31 @@ ALTER TABLE `tbl_price`
 -- AUTO_INCREMENT for table `tbl_products`
 --
 ALTER TABLE `tbl_products`
-  MODIFY `products_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `products_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_available`
 --
 ALTER TABLE `tbl_prod_available`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_brand`
 --
 ALTER TABLE `tbl_prod_brand`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_color`
 --
 ALTER TABLE `tbl_prod_color`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_gender`
 --
 ALTER TABLE `tbl_prod_gender`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_price`
@@ -622,13 +815,13 @@ ALTER TABLE `tbl_prod_price`
 -- AUTO_INCREMENT for table `tbl_prod_sale`
 --
 ALTER TABLE `tbl_prod_sale`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `tbl_prod_size`
 --
 ALTER TABLE `tbl_prod_size`
-  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tbl_sale`
@@ -640,7 +833,7 @@ ALTER TABLE `tbl_sale`
 -- AUTO_INCREMENT for table `tbl_size`
 --
 ALTER TABLE `tbl_size`
-  MODIFY `size_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `size_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
