@@ -1,15 +1,17 @@
 <?php
-require_once 'scripts/config.php';
+	require_once('scripts/config.php');
 
-if (empty($_POST['username']) || empty($_POST['password'])) {
-    $message = 'Please fill out all fields';
-} else {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $ip = $_SERVER['REMOTE_ADDR'];
+	if(!empty($_POST['username']) && !empty($_POST['password'])){
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$ip = $_SERVER['REMOTE_ADDR'];
 
-    $message = login($username, $password, $ip);
-}
+		$message = login($username, $password, $ip);	
+	}else{
+		if(isset($_POST['username']) || isset($_POST['password'])){
+			$message = 'Please fill the required fields';
+		}
+	}
 
 ?>
 <!DOCTYPE html>
@@ -23,6 +25,9 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
   <title>Admin Login</title>
 </head>
 <body>
+<?php if(!empty($message)):?>
+	<p><?php echo $message;?></p>
+	<?php endif;?>
 <div class="login-page">
     <h3>WELCOME TO SPORTSCHECK!!</h3>
     <div class="form">
@@ -30,10 +35,10 @@ if (empty($_POST['username']) || empty($_POST['password'])) {
      
     <form action="admin_login.php" class="login-form" method="post">
     <label for="username" required autofocus>Username
-    <input type="text" placeholder="username"/>
+    <input type="text" name="username" placeholder="username"/>
     </label>    
     <label for="inputPassword" required>Password
-    <input type="password" placeholder="password"/>
+    <input type="password" name="password" placeholder="password"/>
     </label>
     <button type="submit">login</button>
     </form>

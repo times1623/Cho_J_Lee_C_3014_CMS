@@ -124,7 +124,7 @@ if($_GET['filter']=="size"){
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
           <a href="details.php?id=<?php echo $row['products_id']; ?>">
-          <img src="images/<?php echo $row['products_img']; ?>" alt="<?php echo $row['products_name']; ?> class="bd-placeholder-img card-img-top" width="100%" height="225">
+          <img src="images/<?php echo $row['products_img']; ?>" alt="<?php echo $row['products_name']; ?>" class="bd-placeholder-img card-img-top" width="100%" height="225">
          
             <div class="card-body">
             <p class="card-text"> <?php echo $row['products_name']; ?></p>

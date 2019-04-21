@@ -32,9 +32,8 @@ if (isset($_POST['submit'])) {
 <body>
   <br>
   <div class="container">
-    <a class="btn btn-outline-info" href="./index.php" role="button"><i class="fas fa-arrow-left"></i> Admin Dashboard</a>
-    <br><br>
-    <h1>Add Products</h1>
+    <h1 class="text-center">Add Products</h1>
+    <hr style="width:30%; margin:0 auto; background-color: black; margin-top: 1rem; margin-bottom: 1rem;">
     <form action="admin_addproduct.php" method="post" enctype="multipart/form-data">
 
       <div class="form-group">
@@ -56,13 +55,13 @@ if (isset($_POST['submit'])) {
       <div class="form-group">
         <label for="category">Product Category</label>
         <select class="form-control" id="category" name="category" required>
-          <option>--Select a Category--</option>
+          <option>—Select a Category—</option>
           <?php while ($row = $product_categories->fetch(PDO::FETCH_ASSOC)) : ?>
             <option value="<?php echo $row['cats_id'] ?>"><?php echo $row['cats_name'] ?></option>
           <?php endwhile ?>
         </select>
       </div>
-      <button class="btn btn-primary mb-2" type="submit" name="submit">Add Product</button>
+      <button class="btn btn-primary mb-2" type="submit" name="submit" style="background-color: #FF0002;">Add Product</button>
     </form>
   </div>
 </body>
