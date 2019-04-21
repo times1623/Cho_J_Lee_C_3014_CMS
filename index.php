@@ -40,10 +40,12 @@ if($_GET['filter']=="size"){
   $col = 'products_id';
   $filter = $_GET['name'];
   $results = filterResults($tbl, $tbl_2, $tbl_3, $col, $col_2, $col_3, $filter);
-  $title = $_GET['filter'];
+  $title ="(".$_GET['filter'].")";
 // var_dump($results);
 } else {
   $results = getAll('tbl_products');
+  $title = "Welcome!";
+  $filter = "";
 }
 ?>
 <!DOCTYPE html>
@@ -62,7 +64,7 @@ if($_GET['filter']=="size"){
       <div class="col-lg-3">
 
         <h1 class="my-4">Sports Check</h1>
-        <h2 class="my-4"><?php echo $title ?>(<?php echo $filter ?>)</h2>
+        <h2 class="my-4"><?php echo $title ?><?php echo $filter?></h2>
 
         <!-- main filters -->
         <div class="list-group">
@@ -75,7 +77,7 @@ if($_GET['filter']=="size"){
         </li>
         <li style="list-style-type:none;">Price
           <!-- gender -->
-          <?php while ($row = $gender->fetch(PDO::FETCH_ASSOC)) : ?>
+          <?php while ($row = $price->fetch(PDO::FETCH_ASSOC)) : ?>
           <a href="index.php?filter=price&&name=<?php echo $row['price_level']; ?>" class="list-group-item"><?php echo $row['price_level']; ?></a>
           <?php endwhile; ?>
         </li>
@@ -121,9 +123,9 @@ if($_GET['filter']=="size"){
       <?php while ($row = $results->fetch(PDO::FETCH_ASSOC)) : ?>
         <div class="col-md-4">
           <div class="card mb-4 shadow-sm">
-          <a href="details.php?id=<?php echo $row['products_id']; ?>"><img class="card-img-top" src="images/<?php echo $row['product_img']; ?>" alt="<?php echo $row['product_name']; ?>">
+          <a href="details.php?id=<?php echo $row['products_id']; ?>">
           <img src="images/<?php echo $row['products_img']; ?>" alt="<?php echo $row['products_name']; ?> class="bd-placeholder-img card-img-top" width="100%" height="225">
-          </a>
+         
             <div class="card-body">
             <p class="card-text"> <?php echo $row['products_name']; ?></p>
             <p class="card-text" style="text-decoration:underline;"><?php echo $row['products_price']; ?></p>
@@ -132,6 +134,7 @@ if($_GET['filter']=="size"){
                 <small class="text-muted">9 mins</small>
               </div>
             </div>
+            </a>
           </div>
         </div>
         <?php endwhile; ?>
