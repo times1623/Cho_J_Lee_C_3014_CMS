@@ -1,6 +1,4 @@
 <?php
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
 
 require_once 'scripts/config.php';
 confirm_logged_in();
@@ -12,25 +10,24 @@ $tb1 = "tbl_products";
 $col = "products_id";
 // Get product info
 $found_product = getSingle($tb1, $col, $id);
-// Get categories
-$tbl = "tbl_categories";
-$product_categories = getAll($tbl);
-// Get prod category info
-$get_prod_category = "SELECT cats_id FROM tbl_prods_cats WHERE products_id = :id";
-$prod_category = $pdo->prepare($get_prod_category);
-$prod_category->execute(
-  array(
-    ':id' => $id,
-  )
-);
-$get_prod_cat = $prod_category->fetch(PDO::FETCH_ASSOC);
-$prod_cat = $get_prod_cat['cats_id'];
-// var_dump($prod_cat);
-// Get prod_at_name
-$col2 = "cats_id";
-$get_prod_category = getSingle($tbl, $col2, $prod_cat);
-$prod_cat_name = $get_prod_category->fetch(PDO::FETCH_ASSOC);
-// var_dump($prod_cat_name);
+// categories
+// available in store
+$tbl_1 = "tbl_available";
+$tbl_2 = "tbl_brand";
+$tbl_3 = "tbl_color";
+$tbl_4 = "tbl_gender";
+$tbl_5 = "tbl_price";
+$tbl_6 = "tbl_products";
+
+$product_available = getAll($tbl_1);
+$product_brand = getAll($tbl_2);
+$product_color = getAll($tbl_3);
+$product_gender = getAll($tbl_4);
+$product_price = getAll($tbl_5);
+$product_products = getAll($tbl_6);
+
+
+
 if (is_string($found_product)) {
   $message = "Failed to get the user info!";
 }
@@ -71,7 +68,7 @@ if (isset($_POST['product_update'])) {
 
         <div class="form-group">
           <div>
-            <img style="width: 100px;" src="../images/<?php echo $product['product_img']; ?>" alt="<?php echo $product['products_name'] ?>">
+            <img style="width: 100px;" src="../images/<?php echo $product['products_img']; ?>" alt="<?php echo $product['products_name'] ?>">
           </div>
           <label for="image">Product Image:</label>
           <input type="file" name="image" id="image" value="" required>
@@ -82,7 +79,7 @@ if (isset($_POST['product_update'])) {
         </div>
         <div class="form-group">
           <label for="desc">Product Description:</label>
-          <textarea required class="form-control" rows="3" name="desc" id="desc"><?php echo $product['products_description'] ?></textarea>
+          <textarea required class="form-control" rows="3" name="desc" id="desc"><?php echo $product['products_desc'] ?></textarea>
         </div>
         <div class="form-group">
           <label for="price">Product Price:</label>
@@ -90,12 +87,21 @@ if (isset($_POST['product_update'])) {
         </div>
         <div class="form-group">
           <label for="category">Product Category</label>
-          <select class="form-control" id="category" name="category">
-            <option>--Select a Category--</option>
-            <?php while ($row = $product_categories->fetch(PDO::FETCH_ASSOC)) : ?>
-              <option value="<?php echo $row['cats_id'] ?>"><?php echo $row['cats_name'] ?></option>
+          <select class="form-control" id="category_available" name="available">
+            <option>--Availability In Store--</option>
+            <?php while ($row = $product_available->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['available_id'] ?>"><?php echo $row['available_name'] ?></option>
             <?php endwhile ?>
           </select>
+
+          <select class="form-control" id="category_brand" name="brand">
+            <option>--Brands--</option>
+            <?php while ($row = $product_brand->fetch(PDO::FETCH_ASSOC)) : ?>
+              <option value="<?php echo $row['brand_id'] ?>"><?php echo $row['brand_name'] ?></option>
+            <?php endwhile ?>
+          </select>
+
+        
         </div>
         <button class="btn btn-primary mb-2" type="submit" name="product_update">Edit Product</button>
       </form>
